@@ -71,26 +71,202 @@
 
     /* PORTADA */
 
-    .portada {
-      min-height: 95vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--crema-claro);
-    }
+    <section class="portada">
+  <div class="contenido portada-contenido">
 
-    .fecha {
-      letter-spacing: 5px;
-      font-size: 1rem;
-      margin-top: 30px;
-    }
+    <img
+      src="muerdago.png"
+      alt="Ilustración de muérdago"
+      class="muerdago-portada"
+    >
 
-    .frase {
-      font-style: italic;
-      color: var(--verde);
-      font-size: 1.25rem;
-    }
+    <div class="campanas">
+      <span class="campanas-arriba">SUENAN CAMPANAS DE</span>
 
+      <div class="navidad-boda">
+        <span class="navidad">Navidad</span>
+        <span class="boda-palabra">Boda</span>
+      </div>
+    </div>
+
+    <div class="mensaje-boda">
+      <p class="nos-casamos">¡NOS CASAMOS!</p>
+      <p>y queremos que lo celebréis con nosotros.</p>
+    </div>
+
+    <h1>
+      Beatriz
+      <span class="ampersand">&</span>
+      Manu
+    </h1>
+
+    <div class="fecha">
+      20 · 12 · 2026
+    </div>
+
+  </div>
+</section>
+/* PORTADA ESTILO INVITACIÓN */
+
+.portada {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--crema-claro);
+  overflow: hidden;
+}
+
+.portada-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.muerdago-portada {
+  width: clamp(150px, 25vw, 260px);
+  height: auto;
+  margin-bottom: 30px;
+
+  opacity: 0;
+  transform: translateY(-20px);
+
+  animation:
+    aparecerMuerdago 1.2s ease forwards;
+}
+
+.campanas {
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: aparecerTexto 0.8s ease forwards;
+  animation-delay: 0.8s;
+}
+
+.campanas-arriba {
+  display: block;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  margin-bottom: 3px;
+}
+
+.navidad-boda {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+}
+
+.navidad {
+  position: relative;
+  font-size: 1.6rem;
+}
+
+.navidad::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 55%;
+  width: 0;
+  height: 2px;
+  background: var(--verde);
+  transform: rotate(-7deg);
+  transform-origin: left center;
+
+  animation: tacharNavidad 0.8s ease forwards;
+  animation-delay: 1.8s;
+}
+
+.boda-palabra {
+  font-size: 2.5rem;
+  font-style: italic;
+  color: var(--granate);
+
+  opacity: 0;
+  transform: translateX(-10px);
+
+  animation: aparecerBoda 0.8s ease forwards;
+  animation-delay: 2.4s;
+}
+
+.mensaje-boda {
+  margin-bottom: 35px;
+  opacity: 0;
+  animation: aparecerTexto 0.9s ease forwards;
+  animation-delay: 3s;
+}
+
+.nos-casamos {
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
+
+.portada h1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: clamp(4rem, 12vw, 7rem);
+  line-height: 0.8;
+  margin: 15px 0 35px;
+  color: var(--granate);
+  font-weight: normal;
+
+  opacity: 0;
+  transform: translateY(10px);
+
+  animation: aparecerNombres 1s ease forwards;
+  animation-delay: 3.6s;
+}
+
+.portada .ampersand {
+  color: var(--verde);
+  font-size: 0.55em;
+  margin: 12px 0;
+}
+
+.portada .fecha {
+  opacity: 0;
+  animation: aparecerTexto 1s ease forwards;
+  animation-delay: 4.2s;
+}
+
+
+/* ANIMACIONES */
+
+@keyframes aparecerMuerdago {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aparecerTexto {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tacharNavidad {
+  to {
+    width: calc(100% + 8px);
+  }
+}
+
+@keyframes aparecerBoda {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes aparecerNombres {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
     /* CUENTA ATRÁS */
 
     .cuenta-atras {
