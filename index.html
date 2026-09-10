@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Beatriz & Manu | 20.12.2026</title>
+
+  <style>
+    :root {
+      --crema: #F5F0E4;
+      --crema-claro: #FBF8F1;
+      --verde: #596044;
+      --verde-oscuro: #3F4633;
+      --granate: #A33B45;
+      --texto: #292820;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--crema);
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 90px 24px;
+      text-align: center;
+    }
+
+    .contenido {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 0.75rem;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(4rem, 12vw, 8rem);
+      line-height: 0.9;
+      font-weight: normal;
+      color: var(--granate);
+      margin: 25px 0;
+    }
+
+    h2 {
+      color: var(--granate);
+      font-size: clamp(2.3rem, 7vw, 4rem);
+      font-weight: normal;
+      margin-bottom: 25px;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+
+    /* PORTADA */
+
+    .portada {
+      min-height: 95vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--crema-claro);
+    }
+
+    .fecha {
+      letter-spacing: 5px;
+      font-size: 1rem;
+      margin-top: 30px;
+    }
+
+    .frase {
+      font-style: italic;
+      color: var(--verde);
+      font-size: 1.25rem;
+    }
+
+    /* CUENTA ATRÁS */
+
+    .cuenta-atras {
+      background: var(--verde);
+      color: var(--crema-claro);
+    }
+
+    .cuenta-atras h2 {
+      color: var(--crema-claro);
+    }
+
+    .contador {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 750px;
+      margin: 45px auto 0;
+      gap: 15px;
+    }
+
+    .numero {
+      font-size: clamp(2.2rem, 7vw, 4.5rem);
+      line-height: 1;
+    }
+
+    .unidad {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* EVENTO */
+
+    .evento {
+      background: var(--crema);
+    }
+
+    .fecha-grande {
+      color: var(--verde);
+      font-size: 1.5rem;
+      margin: 25px 0 5px;
+    }
+
+    .hora {
+      font-size: 2.3rem;
+      color: var(--granate);
+      margin-bottom: 25px;
+    }
+
+    .lugar {
+      font-size: 1.35rem;
+      margin-bottom: 5px;
+    }
+
+    /* BOTONES */
+
+    .boton {
+      display: inline-block;
+      margin-top: 35px;
+      padding: 14px 28px;
+      background: var(--granate);
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.75rem;
+      border-radius: 2px;
+      transition: 0.25s ease;
+    }
+
+    .boton:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+
+    /* ASISTENCIA */
+
+    .asistencia {
+      background: var(--crema-claro);
+    }
+
+    .asistencia p {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    /* INFORMACIÓN */
+
+    .informacion {
+      background: var(--verde);
+      color: var(--crema-claro);
+    }
+
+    .informacion h2 {
+      color: var(--crema-claro);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 45px;
+      margin-top: 50px;
+    }
+
+    .info-grid h3 {
+      font-weight: normal;
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+    }
+
+    .info-grid p {
+      font-size: 0.95rem;
+    }
+
+    /* REGALO */
+
+    .regalo {
+      background: var(--crema);
+    }
+
+    .regalo p {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    /* FINAL */
+
+    .final {
+      background: var(--crema-claro);
+      padding-top: 120px;
+      padding-bottom: 120px;
+    }
+
+    .final .iniciales {
+      color: var(--granate);
+      font-size: 4rem;
+      margin: 25px 0;
+    }
+
+    /* MÓVIL */
+
+    @media (max-width: 650px) {
+
+      section {
+        padding: 70px 20px;
+      }
+
+      .portada {
+        min-height: 90vh;
+      }
+
+      .contador {
+        gap: 5px;
+      }
+
+      .numero {
+        font-size: 2.3rem;
+      }
+
+      .unidad {
+        font-size: 0.55rem;
+        letter-spacing: 1px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PORTADA -->
+
+  <section class="portada">
+    <div class="contenido">
+
+      <div class="eyebrow">Nos casamos</div>
+
+      <p class="frase">
+        Suenan campanas de boda...
+      </p>
+
+      <h1>Beatriz<br>& Manu</h1>
+
+      <div class="fecha">
+        20 · 12 · 2026
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CUENTA ATRÁS -->
+
+  <section class="cuenta-atras">
+
+    <div class="contenido">
+
+      <div class="eyebrow">Cada vez queda menos</div>
+
+      <h2>La cuenta atrás ha comenzado</h2>
+
+      <div class="contador">
+
+        <div>
+          <div class="numero" id="dias">000</div>
+          <span class="unidad">Días</span>
+        </div>
+
+        <div>
+          <div class="numero" id="horas">00</div>
+          <span class="unidad">Horas</span>
+        </div>
+
+        <div>
+          <div class="numero" id="minutos">00</div>
+          <span class="unidad">Minutos</span>
+        </div>
+
+        <div>
+          <div class="numero" id="segundos">00</div>
+          <span class="unidad">Segundos</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- EL GRAN DÍA -->
+
+  <section class="evento">
+
+    <div class="contenido">
+
+      <div class="eyebrow">El gran día</div>
+
+      <h2>¡Nos casamos!</h2>
+
+      <div class="fecha-grande">
+        Domingo, 20 de diciembre de 2026
+      </div>
+
+      <div class="hora">
+        12:00 h
+      </div>
+
+      <p class="lugar">
+        Huerto Montesinos · Villa Rosita
+      </p>
+
+      <p>
+        Camino de los Huertos<br>
+        Picanya, Valencia
+      </p>
+
+      <a class="boton"
+         href="https://www.google.com/maps/search/?api=1&query=Huerto+Montesinos+Villa+Rosita+Picanya"
+         target="_blank">
+        Cómo llegar
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONFIRMACIÓN -->
+
+  <section class="asistencia">
+
+    <div class="contenido">
+
+      <div class="eyebrow">Queremos contar contigo</div>
+
+      <h2>¿Nos acompañas?</h2>
+
+      <p>
+        Nos hará muchísima ilusión compartir este día contigo.
+        Confírmanos tu asistencia y cuéntanos todo lo que necesitemos
+        saber para que puedas disfrutar de la celebración.
+      </p>
+
+      <!-- Aquí pondremos el enlace al formulario -->
+      <a class="boton" href="#">
+        Confirmar asistencia
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- INFORMACIÓN -->
+
+  <section class="informacion">
+
+    <div class="contenido">
+
+      <div class="eyebrow">Para que no se te escape nada</div>
+
+      <h2>Información útil</h2>
+
+      <div class="info-grid">
+
+        <div>
+          <h3>📍 Lugar</h3>
+          <p>
+            Huerto Montesinos<br>
+            Villa Rosita · Picanya
+          </p>
+        </div>
+
+        <div>
+          <h3>🕛 Hora</h3>
+          <p>
+            La ceremonia comenzará<br>
+            a las 12:00 h.
+          </p>
+        </div>
+
+        <div>
+          <h3>🎄 Diciembre</h3>
+          <p>
+            Ven con ganas de celebrar,<br>
+            bailar y disfrutar.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- REGALO -->
+
+  <section class="regalo">
+
+    <div class="contenido">
+
+      <div class="eyebrow">Lo más importante es que vengas</div>
+
+      <h2>Nuestro mejor regalo</h2>
+
+      <p>
+        Tenerte con nosotros ese día ya es motivo suficiente para celebrar.
+        Si además quieres ayudarnos a comenzar esta nueva etapa,
+        aquí encontrarás toda la información.
+      </p>
+
+      <!-- Aquí incorporaremos vuestra ilustración / información -->
+
+    </div>
+
+  </section>
+
+
+  <!-- FINAL -->
+
+  <section class="final">
+
+    <div class="contenido">
+
+      <p class="frase">
+        Qué ganas de celebrarlo con vosotros
+      </p>
+
+      <div class="iniciales">
+        B & M
+      </div>
+
+      <div class="fecha">
+        20 · 12 · 2026
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <script>
+
+    const fechaBoda = new Date("2026-12-20T12:00:00+01:00");
+
+    function actualizarCuentaAtras() {
+
+      const ahora = new Date();
+      const diferencia = fechaBoda - ahora;
+
+      if (diferencia <= 0) {
+
+        document.querySelector(".contador").innerHTML =
+          "<div style='grid-column:1/-1;font-size:2rem;'>¡Hoy nos casamos! 🤍</div>";
+
+        return;
+      }
+
+      const dias =
+        Math.floor(diferencia / (1000 * 60 * 60 * 24));
+
+      const horas =
+        Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+
+      const minutos =
+        Math.floor((diferencia / (1000 * 60)) % 60);
+
+      const segundos =
+        Math.floor((diferencia / 1000) % 60);
+
+      document.getElementById("dias").textContent =
+        String(dias).padStart(3, "0");
+
+      document.getElementById("horas").textContent =
+        String(horas).padStart(2, "0");
+
+      document.getElementById("minutos").textContent =
+        String(minutos).padStart(2, "0");
+
+      document.getElementById("segundos").textContent =
+        String(segundos).padStart(2, "0");
+    }
+
+    actualizarCuentaAtras();
+
+    setInterval(actualizarCuentaAtras, 1000);
+
+  </script>
+
+</body>
+</html>
