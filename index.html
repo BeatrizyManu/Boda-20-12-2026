@@ -77,25 +77,41 @@
     /* PORTADA */
 
 /* PORTADA ESTILO INVITACIÓN */
-.adorno-portada {
+.portada {
+  min-height: 100vh;
   position: relative;
-  display: grid;
-  place-items: start center;
-  width: min(700px, 92vw);
-  margin: 0 auto 10px;
-}
 
-.adorno-portada > img {
-  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--crema-claro);
+  overflow: hidden;
 }
 
 .cinta-portada {
-  width: 100%;
-  height: auto;
-  z-index: 1;
+  position: absolute;
 
-  opacity: 0;
-  animation: aparecerTexto 1.2s ease forwards;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  height: calc(100% - 50px);
+  width: auto;
+
+  z-index: 1;
+  pointer-events: none;
+}
+
+.portada-contenido {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: min(600px, 80vw);
 }
 
 .muerdago-portada {
@@ -429,13 +445,17 @@
 
   <!-- PORTADA -->
 
- <section class="portada">
+<section class="portada">
+
+  <img src="cinta.png" alt="" class="cinta-portada">
+
   <div class="contenido portada-contenido">
 
-    <div class="adorno-portada">
-      <img src="cinta.png" alt="" class="cinta-portada">
-      <img src="muerdago.png" alt="Ilustración de muérdago" class="muerdago-portada">
-    </div>
+    <img
+      src="muerdago.png"
+      alt="Ilustración de muérdago"
+      class="muerdago-portada"
+    >
 
     <div class="campanas">
       <span class="campanas-arriba">SUENAN CAMPANAS DE</span>
@@ -451,13 +471,18 @@
       <p>y queremos que lo celebréis con nosotros.</p>
     </div>
 
-    <img src="nombres.png" alt="Beatriz y Manu" class="nombres-imagen">
+    <img
+      src="nombres.png"
+      alt="Beatriz y Manu"
+      class="nombres-imagen"
+    >
 
     <div class="fecha">
       20 · 12 · 2026
     </div>
 
   </div>
+
 </section>
 
 
