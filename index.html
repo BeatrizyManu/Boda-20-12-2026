@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Beatriz & Manu | 20.12.2026</title>
@@ -76,6 +77,59 @@
     /* PORTADA */
 
 /* PORTADA ESTILO INVITACIÓN */
+.adorno-portada {
+  position: relative;
+  display: grid;
+  place-items: start center;
+  width: min(700px, 92vw);
+  margin: 0 auto 10px;
+}
+
+.adorno-portada > img {
+  grid-area: 1 / 1;
+}
+
+.cinta-portada {
+  width: 100%;
+  height: auto;
+  z-index: 1;
+
+  opacity: 0;
+  animation: aparecerTexto 1.2s ease forwards;
+}
+
+.muerdago-portada {
+  width: clamp(220px, 32vw, 360px);
+  height: auto;
+  z-index: 2;
+
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: aparecerMuerdago 1.2s ease forwards;
+}
+
+.boda-imagen {
+  width: clamp(110px, 18vw, 170px);
+  height: auto;
+
+  opacity: 0;
+  transform: translateX(-10px);
+
+  animation: aparecerBoda 0.8s ease forwards;
+  animation-delay: 2.4s;
+}
+
+.nombres-imagen {
+  width: min(520px, 82vw);
+  height: auto;
+  margin: 15px auto 35px;
+
+  opacity: 0;
+  transform: translateY(10px);
+
+  animation: aparecerNombres 1s ease forwards;
+  animation-delay: 3.6s;
+}
 
 .portada {
   min-height: 100vh;
@@ -93,17 +147,6 @@
   width: 100%;
 }
 
-.muerdago-portada {
-  width: clamp(220px, 32vw, 360px);
-  height: auto;
-  margin-bottom: 15px;
-
-  opacity: 0;
-  transform: translateY(-20px);
-
-  animation:
-    aparecerMuerdago 1.2s ease forwards;
-}
 
 .campanas {
   margin-bottom: 30px;
@@ -147,17 +190,6 @@
   animation-delay: 1.8s;
 }
 
-.boda-palabra {
-  font-family: "WindSong", cursive;
-  font-size: 3rem;
-  color: var(--granate);
-
-  opacity: 0;
-  transform: translateX(-10px);
-
-  animation: aparecerBoda 0.8s ease forwards;
-  animation-delay: 2.4s;
-}
 
 .mensaje-boda {
   margin-bottom: 35px;
@@ -172,23 +204,6 @@
   margin-bottom: 3px;
 }
 
-.portada h1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-   font-family: "WindSong", cursive;
-  font-size: clamp(4.5rem, 12vw, 7rem);
-  line-height: 0.95;
-  margin: 15px 0 35px;
-  color: var(--granate);
-  font-weight: normal;
-
-  opacity: 0;
-  transform: translateY(10px);
-
-  animation: aparecerNombres 1s ease forwards;
-  animation-delay: 3.6s;
-}
 
 .portada .ampersand {
   color: var(--verde);
@@ -417,18 +432,17 @@
  <section class="portada">
   <div class="contenido portada-contenido">
 
-    <img
-      src="muerdago.png"
-      alt="Ilustración de muérdago"
-      class="muerdago-portada"
-    >
+    <div class="adorno-portada">
+      <img src="cinta.png" alt="" class="cinta-portada">
+      <img src="muerdago.png" alt="Ilustración de muérdago" class="muerdago-portada">
+    </div>
 
     <div class="campanas">
       <span class="campanas-arriba">SUENAN CAMPANAS DE</span>
 
       <div class="navidad-boda">
         <span class="navidad">Navidad</span>
-        <span class="boda-palabra">Boda</span>
+        <img src="boda.png" alt="Boda" class="boda-imagen">
       </div>
     </div>
 
@@ -437,11 +451,7 @@
       <p>y queremos que lo celebréis con nosotros.</p>
     </div>
 
-    <h1>
-      Beatriz
-      <span class="ampersand">&</span>
-      Manu
-    </h1>
+    <img src="nombres.png" alt="Beatriz y Manu" class="nombres-imagen">
 
     <div class="fecha">
       20 · 12 · 2026
