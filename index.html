@@ -2,15 +2,30 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Beatriz & Manu | 20.12.2026</title>
+  <meta name="description" content="20 de diciembre de 2026 · 12:00 h · Huerto Montesinos, Picanya. Queremos celebrarlo con vosotros.">
+  <meta name="theme-color" content="#FBF8F1">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Beatriz &amp; Manu">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Beatriz &amp; Manu · ¡Nos casamos!">
+  <meta property="og:description" content="20 de diciembre de 2026 · 12:00 h · Huerto Montesinos, Picanya. Queremos celebrarlo con vosotros.">
+  <meta property="og:url" content="https://beatrizymanu.github.io/Boda-20-12-2026/">
+  <meta property="og:image" content="https://beatrizymanu.github.io/Boda-20-12-2026/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Beatriz y Manu se casan el 20 de diciembre de 2026, con un ramillete de muérdago">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Beatriz &amp; Manu · ¡Nos casamos!">
+  <meta name="twitter:description" content="20 de diciembre de 2026 · 12:00 h · Huerto Montesinos, Picanya. Queremos celebrarlo con vosotros.">
+  <meta name="twitter:image" content="https://beatrizymanu.github.io/Boda-20-12-2026/og-image.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=WindSong:wght@400;500&display=swap" rel="stylesheet">
- 
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --crema: #F5F0E4;
@@ -55,14 +70,6 @@
       margin-bottom: 20px;
     }
 
-    h1 {
-      font-size: clamp(4rem, 12vw, 8rem);
-      line-height: 0.9;
-      font-weight: normal;
-      color: var(--granate);
-      margin: 25px 0;
-    }
-
     h2 {
       color: var(--granate);
       font-size: clamp(2.3rem, 7vw, 4rem);
@@ -75,213 +82,193 @@
     }
 
     /* PORTADA */
+    .portada {
+      min-height: 100vh;
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--crema-claro);
+      overflow: hidden;
+      padding: 16px;
+    }
 
-/* PORTADA ESTILO INVITACIÓN */
-.portada {
-  min-height: 100vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--crema-claro);
-  overflow: hidden;
-}
+    .portada-contenido {
+      --wm: clamp(220px, 32vw, 360px); /* ancho del muérdago */
+      --alto: calc(0.899 * var(--wm) + 555px); /* alto del bloque a tamaño base */
+      --ancho: calc(0.74 * (var(--alto) + 6px - 0.103 * var(--wm))); /* ancho del marco */
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: min(600px, 80vw);
+      min-height: var(--alto);
+      /* Todo el bloque (marco y textos) se ajusta al tamaño de la ventana: crece
+         en pantallas grandes hasta ocupar casi todo el alto y se reduce en las
+         bajas o estrechas para que quepa entero (la primera línea es el respaldo). */
+      zoom: 0.85;
+      zoom: min(1.75, tan(atan2(calc(100vh - 72px), var(--alto))), tan(atan2(calc(100vw - 32px), var(--ancho))));
+    }
 
-.cinta-portada {
-  position: absolute;
+    /* Marco: va pegado al bloque de contenido, de modo que el lazo del muérdago
+       queda siempre atado a la línea superior del marco. */
+    .portada-contenido::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: calc(0.103 * var(--wm) - 11px);
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      aspect-ratio: 1525 / 2061;
+      background: url("cinta.png") center / 100% 100% no-repeat;
+      pointer-events: none;
+    }
 
-  top: 90px; /* baja la cinta */
-  left: 50%;
-  transform: translateX(-50%);
+    .muerdago-portada {
+      width: var(--wm);
+      height: auto;
+      margin-top: calc(-0.08 * var(--wm));
+      margin-bottom: calc(-0.13 * var(--wm));
+      z-index: 2;
+      /* En la ilustración el lazo y el tallo quedan a la izquierda del centro
+         de la imagen; se desplaza para que caigan justo en el eje del marco. */
+      transform: translateX(calc(0.0523 * var(--wm)));
+    }
 
-  height: calc(100% - 130px);
-  width: auto;
+    .boda-imagen {
+      width: clamp(110px, 18vw, 170px);
+      height: auto;
+      opacity: 0;
+      transform: translateX(-10px);
+      animation: aparecerBoda 0.8s ease forwards;
+      animation-delay: 2.4s;
+    }
 
-  z-index: 1;
-  pointer-events: none;
-}
+    .nombres-imagen {
+      width: min(520px, 82vw, calc(0.8 * var(--ancho)));
+      height: auto;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: aparecerNombres 1s ease forwards;
+      animation-delay: 3.6s;
+    }
 
-.portada-contenido {
-  position: relative;
-  z-index: 2;
+    .campanas {
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: aparecerTexto 0.8s ease forwards;
+      animation-delay: 0.8s;
+    }
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    .campanas-arriba {
+      display: block;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      margin-bottom: 3px;
+    }
 
-  width: min(600px, 80vw);
-}
+    .navidad-boda {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+    }
 
-.muerdago-portada {
-    width: clamp(220px, 32vw, 360px);
-  height: auto;
+    .navidad {
+      position: relative;
+      font-size: 1.6rem;
+    }
 
-  margin-top: -60px;   /* sube ligeramente el muérdago */
-  margin-bottom: 35px;
+    .navidad::after {
+      content: "";
+      position: absolute;
+      left: -4px;
+      top: 55%;
+      width: 0;
+      height: 2px;
+      background: var(--verde);
+      transform: rotate(-7deg);
+      transform-origin: left center;
+      animation: tacharNavidad 0.8s ease forwards;
+      animation-delay: 1.8s;
+    }
 
-  z-index: 2;
-}
+    .mensaje-boda {
+      margin-top: auto;
+      margin-bottom: 35px;
+      opacity: 0;
+      animation: aparecerTexto 0.9s ease forwards;
+      animation-delay: 3s;
+    }
 
-.boda-imagen {
-  width: clamp(110px, 18vw, 170px);
-  height: auto;
+    .nos-casamos {
+      font-size: 1.25rem;
+      letter-spacing: 1px;
+      margin-bottom: 3px;
+    }
 
-  opacity: 0;
-  transform: translateX(-10px);
+    @keyframes aparecerTexto {
+      to { opacity: 1; }
+    }
 
-  animation: aparecerBoda 0.8s ease forwards;
-  animation-delay: 2.4s;
-}
+    @keyframes tacharNavidad {
+      to { width: calc(100% + 8px); }
+    }
 
-.nombres-imagen {
-  width: min(520px, 82vw);
-  height: auto;
-  margin: 15px auto 35px;
+    @keyframes aparecerBoda {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
 
-  opacity: 0;
-  transform: translateY(10px);
+    @keyframes aparecerNombres {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  animation: aparecerNombres 1s ease forwards;
-  animation-delay: 3.6s;
-}
+    /* EL GRAN DÍA */
+    .evento {
+      background: var(--crema);
+    }
 
-.portada {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--crema-claro);
-  overflow: hidden;
-}
+    .fecha-grande {
+      color: var(--verde);
+      font-size: clamp(1.85rem, 6vw, 3.1rem);
+      line-height: 1.2;
+      margin: 8px 0 14px;
+    }
 
-.portada-contenido {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
+    .hora {
+      font-size: clamp(1.7rem, 5vw, 2.5rem);
+      color: var(--granate);
+      letter-spacing: 3px;
+    }
 
-
-.campanas {
-  margin-bottom: 30px;
-  opacity: 0;
-  animation: aparecerTexto 0.8s ease forwards;
-  animation-delay: 0.8s;
-}
-
-.campanas-arriba {
-  display: block;
-  font-size: 0.95rem;
-  letter-spacing: 2px;
-  margin-bottom: 3px;
-}
-
-.navidad-boda {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  position: relative;
-}
-
-.navidad {
-  position: relative;
-  font-size: 1.6rem;
-}
-
-.navidad::after {
-  content: "";
-  position: absolute;
-  left: -4px;
-  top: 55%;
-  width: 0;
-  height: 2px;
-  background: var(--verde);
-  transform: rotate(-7deg);
-  transform-origin: left center;
-
-  animation: tacharNavidad 0.8s ease forwards;
-  animation-delay: 1.8s;
-}
-
-
-.mensaje-boda {
-  margin-bottom: 35px;
-  opacity: 0;
-  animation: aparecerTexto 0.9s ease forwards;
-  animation-delay: 3s;
-}
-
-.nos-casamos {
-  font-size: 1.25rem;
-  letter-spacing: 1px;
-  margin-bottom: 3px;
-}
-
-
-.portada .ampersand {
-  color: var(--verde);
-  font-size: 0.55em;
-  margin: 12px 0;
-}
-
-.portada .fecha {
-  opacity: 0;
-  animation: aparecerTexto 1s ease forwards;
-  animation-delay: 4.2s;
-}
-
-
-/* ANIMACIONES */
-
-@keyframes aparecerMuerdago {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes aparecerTexto {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes tacharNavidad {
-  to {
-    width: calc(100% + 8px);
-  }
-}
-
-@keyframes aparecerBoda {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes aparecerNombres {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
     /* CUENTA ATRÁS */
-
     .cuenta-atras {
       background: var(--verde);
       color: var(--crema-claro);
+      padding-top: 70px;
+      padding-bottom: 70px;
     }
 
-    .cuenta-atras h2 {
-      color: var(--crema-claro);
+    .cuenta-atras .eyebrow {
+      margin-bottom: 28px;
     }
 
     .contador {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       max-width: 750px;
-      margin: 45px auto 0;
+      margin: 0 auto;
       gap: 15px;
     }
 
@@ -298,32 +285,23 @@
       text-transform: uppercase;
     }
 
-    /* EVENTO */
-
-    .evento {
-      background: var(--crema);
-    }
-
-    .fecha-grande {
-      color: var(--verde);
-      font-size: 1.5rem;
-      margin: 25px 0 5px;
-    }
-
-    .hora {
-      font-size: 2.3rem;
-      color: var(--granate);
-      margin-bottom: 25px;
+    /* LUGAR */
+    .lugar-seccion {
+      background: var(--crema-claro);
     }
 
     .lugar {
-      font-size: 1.35rem;
-      margin-bottom: 5px;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      margin-bottom: 8px;
+    }
+
+    .lugar-detalle {
+      font-size: 1.15rem;
     }
 
     /* BOTONES */
-
-    .boton {
+    .boton,
+    button.boton {
       display: inline-block;
       margin-top: 35px;
       padding: 14px 28px;
@@ -333,58 +311,230 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       font-size: 0.75rem;
+      border: none;
       border-radius: 2px;
+      font-family: inherit;
+      cursor: pointer;
       transition: 0.25s ease;
     }
 
-    .boton:hover {
+    .boton:hover,
+    button.boton:hover {
       opacity: 0.85;
       transform: translateY(-2px);
     }
 
-    /* ASISTENCIA */
-
-    .asistencia {
-      background: var(--crema-claro);
+    button.boton:disabled {
+      opacity: 0.6;
+      cursor: wait;
+      transform: none;
     }
 
-    .asistencia p {
+    /* FORMULARIO */
+    .asistencia {
+      background: var(--crema);
+    }
+
+    .asistencia > .contenido > p {
       max-width: 600px;
       margin: auto;
     }
 
-    /* INFORMACIÓN */
+    .formulario {
+      max-width: 560px;
+      margin: 42px auto 0;
+      text-align: left;
+    }
 
-    .informacion {
+    .campo {
+      margin-bottom: 22px;
+    }
+
+    .campo label,
+    .campo-titulo {
+      display: block;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+      font-size: 1.05rem;
+    }
+
+    .campo input[type="text"],
+    .campo input[type="email"],
+    .campo textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d5cdb8;
+      background: var(--crema-claro);
+      color: var(--texto);
+      font-family: inherit;
+      font-size: 1.05rem;
+    }
+
+    .campo textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .campo input:focus,
+    .campo textarea:focus {
+      outline: 1px solid var(--verde);
+      border-color: var(--verde);
+    }
+
+    .opciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+    }
+
+    .opcion {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+    }
+
+    .opcion input {
+      accent-color: var(--granate);
+    }
+
+    .dietas {
+      display: grid;
+      gap: 12px;
+    }
+
+    .ayuda {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.92rem;
+      opacity: 0.75;
+    }
+
+    .campo-oculto {
+      display: none;
+    }
+
+    .campo-oculto.visible {
+      display: block;
+    }
+
+    .formulario .boton {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .aviso-formulario {
+      display: none;
+      margin-top: 22px;
+      padding: 16px 18px;
+      background: var(--crema-claro);
+      border: 1px solid var(--verde);
+    }
+
+    .aviso-formulario.visible {
+      display: block;
+    }
+
+    .aviso-formulario.error {
+      border-color: var(--granate);
+    }
+
+    /* MENSAJE DE AGRADECIMIENTO TRAS CONFIRMAR */
+    .asistencia.enviada > .contenido > .eyebrow,
+    .asistencia.enviada > .contenido > h2,
+    .asistencia.enviada > .contenido > p,
+    .asistencia.enviada > .contenido > .formulario {
+      display: none;
+    }
+
+    .gracias {
+      display: none;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 44px 28px 34px;
+      background: var(--crema-claro);
+      border: 1px solid rgba(89, 96, 68, 0.35);
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .asistencia.enviada .gracias {
+      display: block;
+      animation: aparecerGracias 0.9s ease both;
+    }
+
+    .gracias-iniciales {
+      display: block;
+      width: min(190px, 52%);
+      height: auto;
+      margin: 0 auto 24px;
+    }
+
+    .gracias h2 {
+      font-size: clamp(1.9rem, 6vw, 2.7rem);
+      margin-bottom: 16px;
+    }
+
+    .gracias p {
+      max-width: 430px;
+      margin: 0 auto;
+    }
+
+    .gracias .gracias-detalle {
+      margin-top: 26px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(163, 59, 69, 0.25);
+      color: var(--verde);
+      font-size: 1rem;
+      letter-spacing: 0.4px;
+      line-height: 1.7;
+    }
+
+    .gracias-detalle[hidden] {
+      display: none;
+    }
+
+    .gracias-cambiar {
+      margin-top: 24px;
+      padding: 6px 10px;
+      border: 0;
+      background: none;
+      color: var(--verde);
+      font: inherit;
+      font-style: italic;
+      font-size: 0.95rem;
+      letter-spacing: 0.4px;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      cursor: pointer;
+    }
+
+    .gracias-cambiar:focus-visible {
+      outline: 2px solid var(--granate);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    @keyframes aparecerGracias {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .asistencia.enviada .gracias {
+        animation: none;
+      }
+    }
+
+    /* REGALO */
+    .regalo {
       background: var(--verde);
       color: var(--crema-claro);
     }
 
-    .informacion h2 {
+    .regalo h2 {
       color: var(--crema-claro);
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 45px;
-      margin-top: 50px;
-    }
-
-    .info-grid h3 {
-      font-weight: normal;
-      margin-bottom: 12px;
-      font-size: 1.4rem;
-    }
-
-    .info-grid p {
-      font-size: 0.95rem;
-    }
-
-    /* REGALO */
-
-    .regalo {
-      background: var(--crema);
     }
 
     .regalo p {
@@ -393,37 +543,461 @@
     }
 
     /* FINAL */
-
     .final {
       background: var(--crema-claro);
       padding-top: 120px;
       padding-bottom: 120px;
     }
 
-    .final .iniciales {
+    /* La frase y el monograma van encima de la foto: la frase en el cielo
+       y el B & M abajo, sobre las piernas. */
+    .final .foto-final {
+      position: relative;
+      width: min(560px, 100%);
+      margin: 0 auto;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .final .foto-final .foto {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Degradado oscuro suave arriba, para que la frase clara se lea sobre el cielo */
+    .final .foto-final::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(20, 18, 14, 0.42) 0%, rgba(20, 18, 14, 0) 34%);
+    }
+
+    .final .foto-final .frase {
+      position: absolute;
+      top: 6%;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      margin: 0;
+      padding: 0 8%;
+      color: var(--crema-claro);
+      font-size: clamp(1.1rem, 3.6vw, 1.7rem);
+      line-height: 1.3;
+      text-wrap: balance;
+      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 500;
+    }
+
+    .final .foto-final .iniciales-imagen {
+      position: absolute;
+      left: 50%;
+      bottom: 5%;
+      z-index: 2;
+      width: 56%;
+      height: auto;
+      transform: translateX(-50%);
+    }
+
+    /* FLOR GIRATORIA */
+    .flor-seccion {
+      background: var(--crema);
+    }
+
+    .flor-giratoria {
+      width: min(470px, 86vw);
+      aspect-ratio: 992 / 917;
+      margin: 0 auto;
+      perspective: 1200px;
+      cursor: pointer;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .flor-giro {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
+
+    .flor-cara {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .flor-cara.detras {
+      transform: rotateY(180deg);
+    }
+
+    .flor-giratoria.girada .flor-giro {
+      transform: rotateY(180deg);
+    }
+
+    @media (hover: hover) {
+      .flor-giratoria:hover .flor-giro {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .flor-giratoria:focus-visible {
+      outline: 2px solid var(--granate);
+      outline-offset: 10px;
+      border-radius: 16px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .flor-giro {
+        transition-duration: 0.01s;
+      }
+    }
+
+    /* Indicaciones bajo la flor: girar (táctil), copiar el número y confirmación */
+    .flor-pista {
+      display: grid;
+      justify-items: center;
+      margin: 18px auto 0;
+      min-height: 1.7em;
+      color: var(--verde);
+      font-style: italic;
+      font-size: 1.02rem;
+      letter-spacing: 0.4px;
+      pointer-events: none;
+    }
+
+    .flor-pista > span {
+      grid-area: 1 / 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .flor-pista svg {
+      width: 17px;
+      height: 17px;
+      flex: none;
+      fill: none;
+      stroke: var(--granate);
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .flor-pista .pista-girar svg {
+      animation: giroIcono 3.2s ease-in-out infinite;
+    }
+
+    @keyframes giroIcono {
+      0%, 60%, 100% { transform: rotate(0deg); }
+      80% { transform: rotate(180deg); }
+    }
+
+    /* En pantallas táctiles se invita a girar la flor */
+    @media (hover: none) {
+      .flor-pista .pista-girar {
+        opacity: 1;
+      }
+    }
+
+    /* Con el reverso a la vista se invita a copiar el número */
+    .flor-giratoria.girada + .flor-pista .pista-girar {
+      opacity: 0;
+    }
+
+    .flor-giratoria.girada + .flor-pista .pista-copiar {
+      opacity: 1;
+    }
+
+    @media (hover: hover) {
+      .flor-giratoria:hover + .flor-pista .pista-copiar {
+        opacity: 1;
+      }
+    }
+
+    /* Confirmación tras copiar */
+    .flor-giratoria.copiado + .flor-pista > span:not(.pista-copiado) {
+      opacity: 0;
+    }
+
+    .flor-giratoria.copiado + .flor-pista .pista-copiado {
+      opacity: 1;
+    }
+
+    .flor-volver {
+      display: none;
+      margin: 8px auto 0;
+      padding: 6px 10px;
+      border: 0;
+      background: none;
+      color: var(--verde);
+      font: inherit;
+      font-style: italic;
+      font-size: 0.95rem;
+      letter-spacing: 0.4px;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .flor-giratoria.girada ~ .flor-volver {
+      display: block;
+    }
+
+    .flor-volver:focus-visible {
+      outline: 2px solid var(--granate);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .solo-lectores {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .flor-pista .pista-girar svg {
+        animation: none;
+      }
+    }
+
+    /* MÚSICA DE FONDO */
+    .boton-musica {
+      position: fixed;
+      right: 16px;
+      bottom: max(16px, env(safe-area-inset-bottom));
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(163, 59, 69, 0.45);
+      border-radius: 50%;
+      background: rgba(251, 248, 241, 0.92);
       color: var(--granate);
-      font-size: 4rem;
-      margin: 25px 0;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(41, 40, 32, 0.15);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .boton-musica:hover {
+      transform: scale(1.06);
+      background: var(--crema-claro);
+    }
+
+    .boton-musica:focus-visible {
+      outline: 2px solid var(--granate);
+      outline-offset: 3px;
+    }
+
+    .boton-musica svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .boton-musica .icono-silencio,
+    .boton-musica[aria-pressed="false"] .icono-sonido {
+      display: none;
+    }
+
+    .boton-musica[aria-pressed="false"] .icono-silencio {
+      display: block;
+    }
+
+    /* Aviso discreto mientras el navegador no deja sonar la música sola */
+    .musica-pista {
+      position: fixed;
+      right: 70px;
+      bottom: max(16px, env(safe-area-inset-bottom));
+      z-index: 100;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      border: 1px solid rgba(163, 59, 69, 0.35);
+      border-radius: 22px;
+      background: rgba(251, 248, 241, 0.94);
+      color: var(--verde);
+      font-style: italic;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      box-shadow: 0 2px 10px rgba(41, 40, 32, 0.12);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .boton-musica.espera + .musica-pista {
+      animation: pistaMusica 12s ease 1s forwards;
+    }
+
+    .boton-musica.espera::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border: 1.5px solid rgba(163, 59, 69, 0.55);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: anilloMusica 2.4s ease-out infinite;
+    }
+
+    @keyframes pistaMusica {
+      0% { opacity: 0; transform: translateX(10px); }
+      6% { opacity: 1; transform: none; }
+      90% { opacity: 1; transform: none; }
+      100% { opacity: 0; transform: none; }
+    }
+
+    @keyframes anilloMusica {
+      0% { transform: scale(0.85); opacity: 0.9; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .boton-musica.espera::after {
+        animation: none;
+        opacity: 0.6;
+      }
+
+      .boton-musica.espera + .musica-pista {
+        animation-duration: 0.01s;
+      }
+    }
+
+    /* TABLET */
+    @media (max-width: 1024px) {
+      section {
+        padding: 80px 32px;
+      }
+
+      .portada-contenido {
+        width: min(560px, 78vw);
+      }
     }
 
     /* MÓVIL */
-
     @media (max-width: 650px) {
-
       section {
         padding: 70px 20px;
       }
 
       .portada {
-        min-height: 90vh;
+        min-height: 100svh;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 30px 8px 16px;
+      }
+
+      /* El marco se dibuja en 9 trozos: las esquinas mantienen su forma y solo
+         se repite el tramo ondulado de los lados, así ocupa toda la altura. */
+      .portada-contenido::before {
+        content: none;
+      }
+
+      .portada::before {
+        content: "";
+        position: absolute;
+        top: 28px;
+        bottom: 8px;
+        left: 10px;
+        right: 10px;
+        z-index: 1;
+        pointer-events: none;
+        box-sizing: border-box;
+        border-style: solid;
+        border-color: transparent;
+        border-width:
+          calc((100vw - 20px) * 0.49705)
+          calc((100vw - 20px) * 0.19672)
+          calc((100vw - 20px) * 0.56459)
+          calc((100vw - 20px) * 0.19672);
+        border-image-source: url("cinta.png");
+        border-image-slice: 758 300 861 300;
+        border-image-repeat: round;
+      }
+
+      .portada {
+        min-height: min(100svh, 960px);
+      }
+
+      .portada-contenido {
+        --wm: min(200px, 52vw);
+        width: min(320px, 88vw);
+        transform: none;
+        zoom: 1;
+        margin: 0 auto;
+        padding-bottom: 30px;
+        min-height: calc(min(100svh, 960px) - 46px);
+        justify-content: flex-start;
+      }
+
+      /* El espacio sobrante se reparte entre los demás bloques, no entre el
+         ramillete y "Suenan campanas de" */
+      .mensaje-boda {
+        margin-top: auto;
+      }
+
+      /* El lazo queda atado a la línea superior del marco */
+      .muerdago-portada {
+        width: var(--wm);
+        height: auto;
+        margin-top: calc(-2px + (100vw - 20px) * 0.01574 - 0.183 * var(--wm));
+        margin-bottom: calc(-0.08 * var(--wm));
+      }
+
+      .campanas {
+        margin-bottom: 16px;
+      }
+
+      .mensaje-boda {
+        margin-bottom: 16px;
+      }
+
+      .nombres-imagen {
+        width: min(300px, 92vw);
+        margin: auto;
+      }
+
+      .evento,
+      .cuenta-atras,
+      .lugar-seccion {
+        padding-top: 60px;
+        padding-bottom: 60px;
       }
 
       .contador {
-        gap: 5px;
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 280px;
+        gap: 22px 12px;
       }
 
       .numero {
-        font-size: 2.3rem;
+        font-size: 2.6rem;
       }
 
       .unidad {
@@ -431,298 +1005,580 @@
         letter-spacing: 1px;
       }
 
-      .info-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
+      .opciones {
+        flex-direction: column;
+      }
+
+      .final .foto-final .iniciales-imagen {
+        width: 62%;
+      }
+    }
+
+    /* SEPARADORES DE ACUARELA CON MUÉRDAGO
+       Un ramillete cuelga de un hilo al comienzo de las secciones claras. */
+    .lugar-seccion,
+    .asistencia,
+    .flor-seccion,
+    .final {
+      --hilo: min(300px, 36vw);
+      --ramillete: 120px;
+      position: relative;
+    }
+
+    .lugar-seccion::before,
+    .asistencia::before,
+    .flor-seccion::before,
+    .final::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: calc(var(--ramillete) * 1.11 + 6px);
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-image:
+        url("muerdago.png"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='0'%3E%3Cstop offset='0' stop-color='%23A33B45' stop-opacity='0'/%3E%3Cstop offset='0.45' stop-color='%23A33B45' stop-opacity='0.55'/%3E%3Cstop offset='1' stop-color='%23A33B45' stop-opacity='0.75'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 6 C30 1 55 11 90 6 S150 1 190 7 S260 11 300 6' fill='none' stroke='url(%23g)' stroke-width='1.3' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='0'%3E%3Cstop offset='0' stop-color='%23A33B45' stop-opacity='0'/%3E%3Cstop offset='0.45' stop-color='%23A33B45' stop-opacity='0.55'/%3E%3Cstop offset='1' stop-color='%23A33B45' stop-opacity='0.75'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='matrix(-1 0 0 1 300 0)'%3E%3Cpath d='M0 6 C30 1 55 11 90 6 S150 1 190 7 S260 11 300 6' fill='none' stroke='url(%23g)' stroke-width='1.3' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3C/svg%3E");
+      /* El lazo del ramillete queda en el centro; el hilo sale a cada lado. */
+      background-size:
+        var(--ramillete) auto,
+        var(--hilo) 12px,
+        var(--hilo) 12px;
+      background-position:
+        calc(50% + var(--ramillete) * 0.05) 0,
+        calc(50% - var(--hilo) / 2 - 6px) calc(var(--ramillete) * 0.2 - 6px),
+        calc(50% + var(--hilo) / 2 + 6px) calc(var(--ramillete) * 0.2 - 6px);
+    }
+
+    .lugar-seccion,
+    .asistencia,
+    .flor-seccion {
+      padding-top: 175px;
+    }
+
+    .final {
+      padding-top: 195px;
+    }
+
+    @media (max-width: 1024px) {
+      .lugar-seccion,
+      .asistencia,
+      .flor-seccion {
+        padding-top: 165px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .lugar-seccion,
+      .asistencia,
+      .flor-seccion,
+      .final {
+        --ramillete: 96px;
+        padding-top: 140px;
+      }
+
+      .final {
+        padding-top: 160px;
+      }
+    }
+
+    /* APARICIÓN SUAVE AL HACER SCROLL */
+    html.js-revelar .revelar {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.6, 0.2, 1);
+      transition-delay: calc(var(--i, 0) * 120ms);
+    }
+
+    html.js-revelar .revelar.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media print {
+      html.js-revelar .revelar {
+        opacity: 1 !important;
+        transform: none !important;
       }
     }
   </style>
 </head>
 
 <body>
+  <audio id="musica" src="cancion.mp3" loop preload="auto"></audio>
+  <button type="button" id="boton-musica" class="boton-musica" aria-pressed="false" aria-label="Activar la música" title="Música">
+    <svg class="icono-sonido" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18 6.5a7.6 7.6 0 0 1 0 11"/></svg>
+    <svg class="icono-silencio" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M16 9.5l5 5"/><path d="M21 9.5l-5 5"/></svg>
+  </button>
+  <span class="musica-pista" aria-hidden="true">Pulsa para activar la música</span>
 
-  <!-- PORTADA -->
+  <section class="portada">
 
-<section class="portada">
+    <div class="contenido portada-contenido">
+      <img src="muerdago.png" alt="Ilustración de muérdago" class="muerdago-portada">
 
-  <img src="cinta.png" alt="" class="cinta-portada">
-
-  <div class="contenido portada-contenido">
-
-    <img
-      src="muerdago.png"
-      alt="Ilustración de muérdago"
-      class="muerdago-portada"
-    >
-
-    <div class="campanas">
-      <span class="campanas-arriba">SUENAN CAMPANAS DE</span>
-
-      <div class="navidad-boda">
-        <span class="navidad">Navidad</span>
-        <img src="boda.png" alt="Boda" class="boda-imagen">
+      <div class="campanas">
+        <span class="campanas-arriba">SUENAN CAMPANAS DE</span>
+        <div class="navidad-boda">
+          <span class="navidad">Navidad</span>
+          <img src="boda.png" alt="Boda" class="boda-imagen">
+        </div>
       </div>
+
+      <div class="mensaje-boda">
+        <p class="nos-casamos">¡NOS CASAMOS!</p>
+        <p>y queremos que lo celebréis con nosotros.</p>
+      </div>
+
+      <img src="nombres.png" alt="Beatriz y Manu" class="nombres-imagen">
     </div>
+  </section>
 
-    <div class="mensaje-boda">
-      <p class="nos-casamos">¡NOS CASAMOS!</p>
-      <p>y queremos que lo celebréis con nosotros.</p>
-    </div>
-
-    <img
-      src="nombres.png"
-      alt="Beatriz y Manu"
-      class="nombres-imagen"
-    >
-
-    <div class="fecha">
-      20 · 12 · 2026
-    </div>
-
-  </div>
-
-</section>
-
-
-  <!-- CUENTA ATRÁS -->
-
-  <section class="cuenta-atras">
-
+  <section class="evento" id="el-gran-dia">
     <div class="contenido">
+      <div class="eyebrow">El gran día</div>
+      <h2>¡Nos casamos!</h2>
+      <div class="fecha-grande">Domingo<br>20 de diciembre de 2026</div>
+      <div class="hora">12:00 h</div>
+    </div>
+  </section>
 
+  <section class="cuenta-atras" id="cuenta-atras">
+    <div class="contenido">
       <div class="eyebrow">Cada vez queda menos</div>
-
-      <h2>La cuenta atrás ha comenzado</h2>
-
       <div class="contador">
-
         <div>
           <div class="numero" id="dias">000</div>
           <span class="unidad">Días</span>
         </div>
-
         <div>
           <div class="numero" id="horas">00</div>
           <span class="unidad">Horas</span>
         </div>
-
         <div>
           <div class="numero" id="minutos">00</div>
           <span class="unidad">Minutos</span>
         </div>
-
         <div>
           <div class="numero" id="segundos">00</div>
           <span class="unidad">Segundos</span>
         </div>
-
       </div>
-
     </div>
-
   </section>
 
-
-  <!-- EL GRAN DÍA -->
-
-  <section class="evento">
-
+  <section class="lugar-seccion" id="lugar">
     <div class="contenido">
-
-      <div class="eyebrow">El gran día</div>
-
-      <h2>¡Nos casamos!</h2>
-
-      <div class="fecha-grande">
-        Domingo, 20 de diciembre de 2026
-      </div>
-
-      <div class="hora">
-        12:00 h
-      </div>
-
-      <p class="lugar">
-        Huerto Montesinos · Villa Rosita
-      </p>
-
-      <p>
+      <div class="eyebrow">El lugar</div>
+      <h2>Huerto Montesinos</h2>
+      <p class="lugar">Villa Rosita</p>
+      <p class="lugar-detalle">
         Camino de los Huertos<br>
         Picanya, Valencia
       </p>
-
-      <a class="boton"
-         href="https://www.google.com/maps/search/?api=1&query=Huerto+Montesinos+Villa+Rosita+Picanya"
-         target="_blank">
+      <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Huerto+Montesinos+Villa+Rosita+Picanya" target="_blank" rel="noopener">
         Cómo llegar
       </a>
-
     </div>
-
   </section>
 
-
-  <!-- CONFIRMACIÓN -->
-
-  <section class="asistencia">
-
+  <section class="asistencia" id="asistencia">
     <div class="contenido">
-
       <div class="eyebrow">Queremos contar contigo</div>
-
       <h2>¿Nos acompañas?</h2>
-
       <p>
         Nos hará muchísima ilusión compartir este día contigo.
-        Confírmanos tu asistencia y cuéntanos todo lo que necesitemos
-        saber para que puedas disfrutar de la celebración.
+        Confírmanos tu asistencia y cuéntanos si tienes alguna dieta especial
+        para que puedas disfrutar de la celebración.
       </p>
 
-      <!-- Aquí pondremos el enlace al formulario -->
-      <a class="boton" href="#">
-        Confirmar asistencia
-      </a>
+      <form class="formulario" id="formulario-asistencia" action="https://formsubmit.co/mpmanuel21@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Confirmación de asistencia — Boda Beatriz y Manu">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://beatrizymanu.github.io/Boda-20-12-2026/?enviado=1#asistencia">
+        <input type="text" name="_honey" style="display:none">
 
-    </div>
-
-  </section>
-
-
-  <!-- INFORMACIÓN -->
-
-  <section class="informacion">
-
-    <div class="contenido">
-
-      <div class="eyebrow">Para que no se te escape nada</div>
-
-      <h2>Información útil</h2>
-
-      <div class="info-grid">
-
-        <div>
-          <h3>📍 Lugar</h3>
-          <p>
-            Huerto Montesinos<br>
-            Villa Rosita · Picanya
-          </p>
+        <div class="campo">
+          <label for="nombre">Nombre y apellidos</label>
+          <input type="text" id="nombre" name="Nombre" required autocomplete="name">
         </div>
 
-        <div>
-          <h3>🕛 Hora</h3>
-          <p>
-            La ceremonia comenzará<br>
-            a las 12:00 h.
-          </p>
+        <div class="campo">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="Email" required autocomplete="email">
         </div>
 
-        <div>
-          <h3>🎄 Diciembre</h3>
-          <p>
-            Ven con ganas de celebrar,<br>
-            bailar y disfrutar.
-          </p>
+        <div class="campo">
+          <span class="campo-titulo">¿Vas a asistir?</span>
+          <div class="opciones">
+            <label class="opcion"><input type="radio" name="Asistencia" value="Sí" required> Sí</label>
+            <label class="opcion"><input type="radio" name="Asistencia" value="No"> No</label>
+            <label class="opcion"><input type="radio" name="Asistencia" value="Aún no lo sé"> Aún no lo sé</label>
+          </div>
         </div>
 
+        <div class="campo">
+          <span class="campo-titulo">¿Tienes alguna dieta especial?</span>
+          <span class="ayuda">Marca lo que corresponda. Si no tienes ninguna, déjalo en blanco.</span>
+          <div class="dietas">
+            <label class="opcion"><input type="checkbox" name="Dieta vegana" value="Sí"> Vegano</label>
+            <label class="opcion"><input type="checkbox" name="Dieta vegetariana" value="Sí"> Vegetariano</label>
+            <label class="opcion">
+              <input type="checkbox" name="Alergia alimentaria" value="Sí" id="check-alergia">
+              ¿Tienes alguna alergia o intolerancia?
+            </label>
+          </div>
+        </div>
+
+        <div class="campo campo-oculto" id="campo-alergia">
+          <label for="alergia-detalle">¿A qué alimento o alimentos?</label>
+          <input type="text" id="alergia-detalle" name="Detalle alergia" placeholder="Por ejemplo: frutos secos, gluten, lactosa...">
+        </div>
+
+        <div class="campo">
+          <label for="cancion">¿Qué canción te gustaría escuchar en la boda?</label>
+          <input type="text" id="cancion" name="Canción" placeholder="Título y artista">
+        </div>
+
+        <div class="campo">
+          <label for="mensaje">¿Quieres contarnos algo más?</label>
+          <textarea id="mensaje" name="Mensaje" placeholder="Acompañante, lo que quieras..."></textarea>
+        </div>
+
+        <button class="boton" type="submit" id="boton-enviar">Confirmar asistencia</button>
+        <p class="aviso-formulario" id="aviso-formulario" role="status"></p>
+      </form>
+
+      <div class="gracias" id="gracias" role="status" tabindex="-1">
+        <img class="gracias-iniciales" src="iniciales.png" alt="" width="1600" height="529">
+        <div class="eyebrow">Confirmación recibida</div>
+        <h2 id="gracias-titulo">¡Gracias!</h2>
+        <p id="gracias-texto"></p>
+        <p class="gracias-detalle" id="gracias-detalle">
+          Domingo 20 de diciembre de 2026 · 12:00 h<br>
+          Huerto Montesinos · Villa Rosita, Picanya
+        </p>
+        <button type="button" class="gracias-cambiar" id="gracias-cambiar">Quiero cambiar mi respuesta</button>
       </div>
-
     </div>
-
   </section>
-
-
-  <!-- REGALO -->
 
   <section class="regalo">
-
     <div class="contenido">
-
       <div class="eyebrow">Lo más importante es que vengas</div>
-
       <h2>Nuestro mejor regalo</h2>
-
       <p>
-        Tenerte con nosotros ese día ya es motivo suficiente para celebrar.
-        Si además quieres ayudarnos a comenzar esta nueva etapa,
-        aquí encontrarás toda la información.
+        El mejor regalo es, sin duda, poder disfrutar de este día con todos vosotros.
       </p>
-
-      <!-- Aquí incorporaremos vuestra ilustración / información -->
-
     </div>
-
   </section>
 
-
-  <!-- FINAL -->
+  <section class="flor-seccion">
+    <div class="contenido">
+      <div class="flor-giratoria" id="flor-giratoria" role="button" tabindex="0" aria-pressed="false" aria-label="Girar la flor para ver el mensaje de detrás">
+        <div class="flor-giro">
+          <img class="flor-cara delante" src="flor-delante.webp" alt="Flor de Pascua en acuarela" width="992" height="917" draggable="false" loading="lazy">
+          <img class="flor-cara detras" src="flor-detras.png" alt="Pero, si además queréis tener un detalle con nosotros, podéis hacerlo aquí: ES94 0186 5001 6505 2307 3879" width="992" height="917" draggable="false" loading="lazy">
+        </div>
+      </div>
+      <p class="flor-pista" aria-hidden="true">
+        <span class="pista-girar"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.5-4.5M4 4v3.5h3.5M4 13a8 8 0 0 0 14.5 4.5M20 20v-3.5h-3.5"/></svg>Toca la flor para darle la vuelta</span>
+        <span class="pista-copiar"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span class="t">Pulsa para copiar el número de cuenta</span></span>
+        <span class="pista-copiado"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="t">Número de cuenta copiado</span></span>
+      </p>
+      <button type="button" class="flor-volver">Volver a la flor</button>
+      <span class="solo-lectores" id="flor-estado" role="status" aria-live="polite"></span>
+    </div>
+  </section>
 
   <section class="final">
-
     <div class="contenido">
-
-      <p class="frase">
-        Qué ganas de celebrarlo con vosotros
-      </p>
-
-      <div class="iniciales">
-        B & M
+      <div class="foto-final">
+        <img class="foto" src="foto-final.jpg" alt="Beatriz y Manu riendo en la playa, él con ella en brazos" width="1259" height="1600" loading="lazy">
+        <p class="frase">Qué ganas de celebrarlo con vosotros</p>
+        <img src="iniciales.png" alt="B &amp; M" class="iniciales-imagen">
       </div>
-
-      <div class="fecha">
-        20 · 12 · 2026
-      </div>
-
     </div>
-
   </section>
 
-
   <script>
-
     const fechaBoda = new Date("2026-12-20T12:00:00+01:00");
 
     function actualizarCuentaAtras() {
-
       const ahora = new Date();
       const diferencia = fechaBoda - ahora;
+      const contador = document.querySelector(".contador");
 
       if (diferencia <= 0) {
-
-        document.querySelector(".contador").innerHTML =
-          "<div style='grid-column:1/-1;font-size:2rem;'>¡Hoy nos casamos! 🤍</div>";
-
+        contador.innerHTML = "<div style='grid-column:1/-1;font-size:2rem;'>¡Hoy nos casamos!</div>";
         return;
       }
 
-      const dias =
-        Math.floor(diferencia / (1000 * 60 * 60 * 24));
-
-      const horas =
-        Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-
-      const minutos =
-        Math.floor((diferencia / (1000 * 60)) % 60);
-
-      const segundos =
-        Math.floor((diferencia / 1000) % 60);
-
       document.getElementById("dias").textContent =
-        String(dias).padStart(3, "0");
-
+        String(Math.floor(diferencia / (1000 * 60 * 60 * 24))).padStart(3, "0");
       document.getElementById("horas").textContent =
-        String(horas).padStart(2, "0");
-
+        String(Math.floor((diferencia / (1000 * 60 * 60)) % 24)).padStart(2, "0");
       document.getElementById("minutos").textContent =
-        String(minutos).padStart(2, "0");
-
+        String(Math.floor((diferencia / (1000 * 60)) % 60)).padStart(2, "0");
       document.getElementById("segundos").textContent =
-        String(segundos).padStart(2, "0");
+        String(Math.floor((diferencia / 1000) % 60)).padStart(2, "0");
     }
 
     actualizarCuentaAtras();
-
     setInterval(actualizarCuentaAtras, 1000);
 
-  </script>
+    const checkAlergia = document.getElementById("check-alergia");
+    const campoAlergia = document.getElementById("campo-alergia");
+    const detalleAlergia = document.getElementById("alergia-detalle");
 
+    checkAlergia.addEventListener("change", function () {
+      campoAlergia.classList.toggle("visible", checkAlergia.checked);
+      detalleAlergia.required = checkAlergia.checked;
+      if (!checkAlergia.checked) detalleAlergia.value = "";
+    });
+
+    const formulario = document.getElementById("formulario-asistencia");
+    const aviso = document.getElementById("aviso-formulario");
+    const botonEnviar = document.getElementById("boton-enviar");
+
+    const seccionAsistencia = document.getElementById("asistencia");
+    const gracias = document.getElementById("gracias");
+    const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    // Sustituye el formulario por un mensaje de agradecimiento personalizado.
+    function mostrarGracias(nombre, asistencia, desplazar) {
+      const primerNombre = (nombre || "").trim().split(/\s+/)[0];
+      const saludo = primerNombre ? "¡Gracias, " + primerNombre + "!" : "¡Gracias!";
+      let texto = "Hemos recibido tu confirmación. ¡Nos vemos muy pronto!";
+      let verDetalle = true;
+
+      if (asistencia === "Sí") {
+        texto = "Ya tenemos anotada tu asistencia. Nos hace muchísima ilusión que vengas: será un día para recordar y no sería lo mismo sin ti.";
+      } else if (asistencia === "No") {
+        texto = "Sentimos que no puedas acompañarnos, pero te agradecemos mucho que nos lo hayas dicho. Te echaremos de menos y te llevaremos en el corazón ese día.";
+        verDetalle = false;
+      } else if (asistencia === "Aún no lo sé") {
+        texto = "Hemos anotado que todavía no lo sabes. Cuando lo tengas claro, vuelve a rellenar el formulario o escríbenos y lo actualizamos.";
+      }
+
+      document.getElementById("gracias-titulo").textContent = saludo;
+      document.getElementById("gracias-texto").textContent = texto;
+      document.getElementById("gracias-detalle").hidden = !verDetalle;
+      seccionAsistencia.classList.add("enviada");
+
+      if (desplazar) {
+        requestAnimationFrame(function () {
+          gracias.scrollIntoView({ behavior: sinMovimiento.matches ? "auto" : "smooth", block: "center" });
+          gracias.focus({ preventScroll: true });
+        });
+      }
+    }
+
+    document.getElementById("gracias-cambiar").addEventListener("click", function () {
+      seccionAsistencia.classList.remove("enviada");
+      formulario.scrollIntoView({ behavior: sinMovimiento.matches ? "auto" : "smooth", block: "start" });
+    });
+
+    if (new URLSearchParams(window.location.search).get("enviado") === "1") {
+      mostrarGracias("", "", false);
+    }
+
+    formulario.addEventListener("submit", async function (evento) {
+      evento.preventDefault();
+      aviso.classList.remove("visible", "error");
+      botonEnviar.disabled = true;
+      botonEnviar.textContent = "Enviando...";
+
+      const datos = new FormData(formulario);
+
+      try {
+        const respuesta = await fetch("https://formsubmit.co/ajax/mpmanuel21@gmail.com", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: datos
+        });
+
+        const resultado = await respuesta.json();
+
+        if (respuesta.ok && resultado.success !== "false") {
+          formulario.reset();
+          campoAlergia.classList.remove("visible");
+          detalleAlergia.required = false;
+          mostrarGracias(datos.get("Nombre"), datos.get("Asistencia"), true);
+        } else {
+          throw new Error(resultado.message || "No se ha podido enviar");
+        }
+      } catch (error) {
+        aviso.textContent = "No se ha podido enviar ahora mismo. Vuelve a intentarlo en un momento o escríbenos a mpmanuel21@gmail.com.";
+        aviso.classList.add("visible", "error");
+      } finally {
+        botonEnviar.disabled = false;
+        botonEnviar.textContent = "Confirmar asistencia";
+      }
+    });
+
+    const florGiratoria = document.getElementById("flor-giratoria");
+    if (florGiratoria) {
+      const NUMERO_CUENTA = "ES9401865001650523073879";
+      const estado = document.getElementById("flor-estado");
+      const textoCopiado = document.querySelector(".pista-copiado .t");
+      const botonVolver = document.querySelector(".flor-volver");
+      const conRaton = window.matchMedia("(hover: hover)");
+      const etiquetaFrente = florGiratoria.getAttribute("aria-label");
+      let temporizador;
+
+      const girarFlor = (girada) => {
+        florGiratoria.classList.toggle("girada", girada);
+        florGiratoria.setAttribute("aria-pressed", String(girada));
+        florGiratoria.setAttribute("aria-label", girada ? "Copiar el número de cuenta" : etiquetaFrente);
+      };
+
+      const copiarTexto = async (texto) => {
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(texto);
+            return true;
+          }
+        } catch (error) { /* se prueba el método alternativo */ }
+        try {
+          const campo = document.createElement("textarea");
+          campo.value = texto;
+          campo.setAttribute("readonly", "");
+          campo.style.cssText = "position:fixed;top:0;left:0;opacity:0;";
+          document.body.appendChild(campo);
+          campo.select();
+          campo.setSelectionRange(0, texto.length);
+          const ok = document.execCommand("copy");
+          campo.remove();
+          return ok;
+        } catch (error) {
+          return false;
+        }
+      };
+
+      const copiarCuenta = async () => {
+        const ok = await copiarTexto(NUMERO_CUENTA);
+        textoCopiado.textContent = ok ? "Número de cuenta copiado" : "No se ha podido copiar el número";
+        estado.textContent = "";
+        estado.textContent = textoCopiado.textContent;
+        florGiratoria.classList.add("copiado");
+        clearTimeout(temporizador);
+        temporizador = setTimeout(() => florGiratoria.classList.remove("copiado"), 2800);
+      };
+
+      // Con ratón el reverso aparece al pasar por encima, así que un clic copia;
+      // en pantallas táctiles el primer toque gira la flor y el siguiente copia.
+      florGiratoria.addEventListener("click", () => {
+        if (conRaton.matches || florGiratoria.classList.contains("girada")) copiarCuenta();
+        else girarFlor(true);
+      });
+      florGiratoria.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          if (florGiratoria.classList.contains("girada")) copiarCuenta();
+          else girarFlor(true);
+        } else if (e.key === "Escape") {
+          girarFlor(false);
+        }
+      });
+      florGiratoria.addEventListener("blur", () => {
+        if (conRaton.matches) girarFlor(false);
+      });
+      if (botonVolver) botonVolver.addEventListener("click", () => girarFlor(false));
+    }
+
+    // Música de fondo: suena al entrar. Si el navegador no lo permite sin una
+    // interacción previa, empieza con el primer toque, clic o tecla.
+    const musica = document.getElementById("musica");
+    const botonMusica = document.getElementById("boton-musica");
+    if (musica && botonMusica) {
+      musica.volume = 0.8;
+      let pausadaPorElUsuario = false;
+      const eventosInicio = ["pointerdown", "pointerup", "click", "touchend", "keydown"];
+      const pintar = () => {
+        const suena = !musica.paused;
+        botonMusica.setAttribute("aria-pressed", String(suena));
+        botonMusica.setAttribute("aria-label", suena ? "Silenciar la música" : "Activar la música");
+        if (suena) botonMusica.classList.remove("espera");
+      };
+      const dejarDeEsperar = () => {
+        eventosInicio.forEach((ev) => document.removeEventListener(ev, alPrimerGesto, true));
+      };
+      function alPrimerGesto(e) {
+        if (botonMusica.contains(e.target) || pausadaPorElUsuario) return;
+        musica.play().then(dejarDeEsperar).catch(() => {});
+      }
+      musica.addEventListener("play", pintar);
+      musica.addEventListener("pause", pintar);
+      botonMusica.addEventListener("click", () => {
+        botonMusica.classList.remove("espera");
+        if (musica.paused) {
+          pausadaPorElUsuario = false;
+          musica.play().catch(() => {});
+        } else {
+          pausadaPorElUsuario = true;
+          musica.pause();
+        }
+        dejarDeEsperar();
+      });
+      const intento = musica.play();
+      if (intento && typeof intento.catch === "function") {
+        intento.catch(() => {
+          botonMusica.classList.add("espera");
+          eventosInicio.forEach((ev) => document.addEventListener(ev, alPrimerGesto, true));
+        });
+      }
+      pintar();
+    }
+
+    // Aparición suave de cada bloque al llegar a él con el scroll.
+    (function () {
+      if (!("IntersectionObserver" in window)) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      const elementos = [];
+      document.querySelectorAll("section:not(.portada) > .contenido").forEach(function (contenido) {
+        let orden = 0;
+        Array.from(contenido.children).forEach(function (hijo) {
+          if (hijo.matches(".gracias, .solo-lectores, .flor-volver")) return;
+          hijo.classList.add("revelar");
+          hijo.style.setProperty("--i", Math.min(orden++, 5));
+          elementos.push(hijo);
+        });
+      });
+      document.documentElement.classList.add("js-revelar");
+
+      // Al terminar, el elemento recupera sus estilos normales (hover, etc.).
+      function limpiar(el) {
+        el.classList.remove("revelar", "visible");
+        el.style.removeProperty("--i");
+      }
+
+      function mostrar(el) {
+        el.classList.add("visible");
+        el.addEventListener("transitionend", function fin(e) {
+          if (e.target !== el || e.propertyName !== "opacity") return;
+          el.removeEventListener("transitionend", fin);
+          limpiar(el);
+        });
+        setTimeout(function () { limpiar(el); }, 2600);
+      }
+
+      const observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          // También se muestra lo que ya quedó por encima (p. ej. al recargar a mitad de página).
+          if (entrada.isIntersecting || entrada.boundingClientRect.top < 0) {
+            mostrar(entrada.target);
+            observador.unobserve(entrada.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0 });
+
+      elementos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
 </body>
 </html>
