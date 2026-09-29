@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <script>
+    (function () {
+      try {
+        var esTactil =
+          matchMedia("(hover: none)").matches ||
+          matchMedia("(pointer: coarse)").matches ||
+          (navigator.maxTouchPoints || 0) > 0 ||
+          "ontouchstart" in window;
+        if (esTactil) document.documentElement.classList.add("es-tactil");
+      } catch (e) {}
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beatriz & Manu | 20.12.2026</title>
@@ -15,7 +27,7 @@
   <meta property="og:image" content="https://beatrizymanu.github.io/Boda-20-12-2026/og-image.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:height" content="1200">
   <meta property="og:image:alt" content="Beatriz y Manu se casan el 20 de diciembre de 2026, con un ramillete de muérdago">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Beatriz &amp; Manu · ¡Nos casamos!">
@@ -835,10 +847,14 @@
     }
 
     /* En pantallas táctiles se invita a girar la flor */
-    @media (hover: none) {
+    @media (hover: none), (pointer: coarse) {
       .flor-pista .pista-girar {
         opacity: 1;
       }
+    }
+
+    html.es-tactil .flor-pista .pista-girar {
+      opacity: 1;
     }
 
     /* Con el reverso a la vista se invita a copiar el número */
