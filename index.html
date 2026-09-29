@@ -51,6 +51,7 @@
       background: var(--crema);
       color: var(--texto);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     section {
@@ -291,14 +292,85 @@
     }
 
     .lugar {
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      margin-bottom: 8px;
+      font-size: clamp(1.05rem, 3vw, 1.3rem);
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      opacity: 0.82;
     }
 
     .lugar-detalle {
-      font-size: 1.15rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      letter-spacing: 0.3px;
+      opacity: 0.75;
     }
 
+    /* MARCO DE EL LUGAR (mismo lazo y marco que la portada, más ajustado al texto) */
+    .lugar-marco {
+      --lm: min(600px, 96%);
+      --escala: clamp(280px, 86vw, 440px); /* longitud pura (sin %), necesaria porque border-width solo acepta <length>: si --escala dependiera de --lm (que usa % del contenedor) el navegador invalida el calc() y el marco se ve como una línea fina discontinua en vez de la cinta ondulada */
+      --lw: calc(var(--escala) * 0.255); /* ancho del muérdago, reducido ~25% para aligerar la cabecera */
+      position: relative;
+      z-index: 1;
+      width: var(--lm);
+      margin: 0 auto;
+      box-sizing: border-box;
+      padding: calc(var(--escala) * 0.34) calc(var(--lm) * 0.07) calc(var(--escala) * 0.15);
+    }
+
+    .lugar-marco .eyebrow {
+      margin-bottom: 6px;
+    }
+
+    .lugar-marco h2 {
+      font-size: clamp(1.7rem, 6.4vw, 3.2rem);
+      white-space: nowrap;
+      margin-bottom: 4px;
+    }
+
+    .lugar-marco::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      border-style: solid;
+      border-color: transparent;
+      border-width: calc(var(--escala) * 0.248) calc(var(--escala) * 0.098) calc(var(--escala) * 0.282) calc(var(--escala) * 0.098);
+      border-image-source: url("cinta.png");
+      border-image-slice: 758 300 861 300;
+      border-image-repeat: round;
+      pointer-events: none;
+    }
+
+    .muerdago-lugar {
+      position: absolute;
+      top: calc(var(--escala) * -0.02);
+      left: 50%;
+      width: var(--lw);
+      height: auto;
+      transform: translateX(calc(-50% + var(--lw) * 0.0523));
+      z-index: 1;
+    }
+
+    .lugar-marco .lugar-detalle {
+      margin-top: 10px;
+    }
+
+    .lugar-marco .boton {
+      margin-top: 22px;
+      padding: 11px 24px;
+      letter-spacing: 0.8px;
+    }
+
+    .lugar-mapa-nota {
+      display: block;
+      margin-top: 8px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.4px;
+      opacity: 0.55;
+    }
     /* BOTONES */
     .boton,
     button.boton {
@@ -531,31 +603,124 @@
     .regalo {
       background: var(--verde);
       color: var(--crema-claro);
+      padding-top: 160px;
+      padding-bottom: 145px;
     }
 
-    .regalo h2 {
-      color: var(--crema-claro);
+    @media (max-width: 1024px) {
+      .regalo {
+        padding-top: 155px;
+        padding-bottom: 140px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .regalo {
+        padding-top: 150px;
+        padding-bottom: 135px;
+      }
+    }
+
+    .regalo .eyebrow {
+      position: relative;
+      width: fit-content;
+      font-size: clamp(1.35rem, 4.4vw, 1.9rem);
+      letter-spacing: 1.5px;
+      line-height: 1.35;
+      margin: 0 auto 22px;
     }
 
     .regalo p {
+      position: relative;
       max-width: 600px;
       margin: auto;
+    }
+
+    /* Tres flores de Pascua decorativas, la misma acuarela que la flor
+       giratoria: la grande (con la pequeña asomando) arriba a la izquierda
+       de "LO", y la mediana justo debajo de "vosotros". */
+    .regalo-flores-arriba {
+      position: absolute;
+      z-index: 1;
+      top: -18px;
+      left: -8px;
+      transform: translate(-92%, -78%);
+      width: min(170px, 42vw);
+      aspect-ratio: 992 / 917;
+      pointer-events: none;
+    }
+
+    .regalo-flor {
+      pointer-events: none;
+      height: auto;
+    }
+
+    .regalo-flor-grande {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+    }
+
+    .regalo-flor-pequena {
+      position: absolute;
+      bottom: 4%;
+      right: -14%;
+      width: 42%;
+    }
+
+    .regalo-flor-mediana {
+      position: absolute;
+      z-index: 1;
+      bottom: -10px;
+      right: -6px;
+      transform: translate(58%, 92%);
+      width: min(135px, 33vw);
+      height: auto;
+      pointer-events: none;
+    }
+
+    /* En pantallas más estrechas el desplazamiento hacia afuera de las
+       flores (pensado para sobresalir un poco de "LO" y "vosotros" en
+       anchos grandes) las saca del área visible. Se reduce el desplazamiento
+       para que queden enteras dentro de la pantalla. */
+    @media (max-width: 1024px) {
+      .regalo-flor-mediana {
+        right: -2px;
+        transform: translate(32%, 90%);
+        width: min(120px, 30vw);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .regalo-flores-arriba {
+        top: -28px;
+        left: 6px;
+        transform: translate(-30%, -82%);
+        width: min(148px, 40vw);
+      }
+
+      .regalo-flor-mediana {
+        right: 6px;
+        transform: translate(16%, 82%);
+        width: min(108px, 30vw);
+      }
     }
 
     /* FINAL */
     .final {
       background: var(--crema-claro);
-      padding-top: 120px;
+      padding-top: 0;
       padding-bottom: 120px;
     }
 
-    /* La frase y el monograma van encima de la foto: la frase en el cielo
-       y el B & M abajo, sobre las piernas. */
+    /* La frase y el monograma ya van impresos en la propia foto (foto-final.jpg).
+       La foto ocupa todo el ancho de la pantalla, de lado a lado (sale del
+       ancho normal de la página), sin recortarla: el alto se ajusta solo. */
     .final .foto-final {
       position: relative;
-      width: min(560px, 100%);
-      margin: 0 auto;
-      border-radius: 4px;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
       overflow: hidden;
     }
 
@@ -563,43 +728,6 @@
       display: block;
       width: 100%;
       height: auto;
-    }
-
-    /* Degradado oscuro suave arriba, para que la frase clara se lea sobre el cielo */
-    .final .foto-final::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background: linear-gradient(to bottom, rgba(20, 18, 14, 0.42) 0%, rgba(20, 18, 14, 0) 34%);
-    }
-
-    .final .foto-final .frase {
-      position: absolute;
-      top: 6%;
-      left: 0;
-      right: 0;
-      z-index: 2;
-      margin: 0;
-      padding: 0 8%;
-      color: var(--crema-claro);
-      font-size: clamp(1.1rem, 3.6vw, 1.7rem);
-      line-height: 1.3;
-      text-wrap: balance;
-      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
-      font-family: "Cormorant Garamond", serif;
-      font-weight: 500;
-    }
-
-    .final .foto-final .iniciales-imagen {
-      position: absolute;
-      left: 50%;
-      bottom: 5%;
-      z-index: 2;
-      width: 56%;
-      height: auto;
-      transform: translateX(-50%);
     }
 
     /* FLOR GIRATORIA */
@@ -1008,79 +1136,47 @@
       .opciones {
         flex-direction: column;
       }
-
-      .final .foto-final .iniciales-imagen {
-        width: 62%;
-      }
     }
 
-    /* SEPARADORES DE ACUARELA CON MUÉRDAGO
-       Un ramillete cuelga de un hilo al comienzo de las secciones claras. */
-    .lugar-seccion,
-    .asistencia,
-    .flor-seccion,
-    .final {
-      --hilo: min(300px, 36vw);
-      --ramillete: 120px;
-      position: relative;
-    }
-
-    .lugar-seccion::before,
-    .asistencia::before,
-    .flor-seccion::before,
-    .final::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: calc(var(--ramillete) * 1.11 + 6px);
-      pointer-events: none;
-      background-repeat: no-repeat;
-      background-image:
-        url("muerdago.png"),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='0'%3E%3Cstop offset='0' stop-color='%23A33B45' stop-opacity='0'/%3E%3Cstop offset='0.45' stop-color='%23A33B45' stop-opacity='0.55'/%3E%3Cstop offset='1' stop-color='%23A33B45' stop-opacity='0.75'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 6 C30 1 55 11 90 6 S150 1 190 7 S260 11 300 6' fill='none' stroke='url(%23g)' stroke-width='1.3' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E"),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='0'%3E%3Cstop offset='0' stop-color='%23A33B45' stop-opacity='0'/%3E%3Cstop offset='0.45' stop-color='%23A33B45' stop-opacity='0.55'/%3E%3Cstop offset='1' stop-color='%23A33B45' stop-opacity='0.75'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='matrix(-1 0 0 1 300 0)'%3E%3Cpath d='M0 6 C30 1 55 11 90 6 S150 1 190 7 S260 11 300 6' fill='none' stroke='url(%23g)' stroke-width='1.3' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3C/svg%3E");
-      /* El lazo del ramillete queda en el centro; el hilo sale a cada lado. */
-      background-size:
-        var(--ramillete) auto,
-        var(--hilo) 12px,
-        var(--hilo) 12px;
-      background-position:
-        calc(50% + var(--ramillete) * 0.05) 0,
-        calc(50% - var(--hilo) / 2 - 6px) calc(var(--ramillete) * 0.2 - 6px),
-        calc(50% + var(--hilo) / 2 + 6px) calc(var(--ramillete) * 0.2 - 6px);
-    }
-
+    /* Antes había un ramillete de muérdago colgando al comienzo de estas
+       secciones claras; se ha quitado de todas ellas (incluida la foto
+       final) para dejarlas limpias, así que ahora solo llevan un espaciado
+       superior normal. */
     .lugar-seccion,
     .asistencia,
     .flor-seccion {
-      padding-top: 175px;
-    }
-
-    .final {
-      padding-top: 195px;
+      padding-top: 60px;
     }
 
     @media (max-width: 1024px) {
       .lugar-seccion,
       .asistencia,
       .flor-seccion {
-        padding-top: 165px;
+        padding-top: 40px;
       }
     }
 
     @media (max-width: 650px) {
       .lugar-seccion,
       .asistencia,
-      .flor-seccion,
-      .final {
-        --ramillete: 96px;
-        padding-top: 140px;
+      .flor-seccion {
+        padding-top: 20px;
       }
+    }
 
-      .final {
-        padding-top: 160px;
+    .lugar-seccion {
+      padding-bottom: 40px;
+    }
+
+    @media (max-width: 1024px) {
+      .lugar-seccion {
+        padding-bottom: 28px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .lugar-seccion {
+        padding-bottom: 18px;
       }
     }
 
@@ -1171,16 +1267,20 @@
 
   <section class="lugar-seccion" id="lugar">
     <div class="contenido">
-      <div class="eyebrow">El lugar</div>
-      <h2>Huerto Montesinos</h2>
-      <p class="lugar">Villa Rosita</p>
-      <p class="lugar-detalle">
-        Camino de los Huertos<br>
-        Picanya, Valencia
-      </p>
-      <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Huerto+Montesinos+Villa+Rosita+Picanya" target="_blank" rel="noopener">
-        Cómo llegar
-      </a>
+      <div class="lugar-marco">
+        <img src="muerdago.png" alt="Ilustración de muérdago" class="muerdago-lugar">
+        <div class="eyebrow">El lugar</div>
+        <h2>Huerto Montesinos</h2>
+        <p class="lugar">Villa Rosita</p>
+        <p class="lugar-detalle">
+          Camino de los Huertos<br>
+          Picanya, Valencia
+        </p>
+        <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Huerto+Montesinos+Villa+Rosita+Picanya" target="_blank" rel="noopener">
+          Cómo llegar
+        </a>
+        <span class="lugar-mapa-nota">Se abre en Google Maps</span>
+      </div>
     </div>
   </section>
 
@@ -1194,7 +1294,7 @@
         para que puedas disfrutar de la celebración.
       </p>
 
-      <form class="formulario" id="formulario-asistencia" action="https://formsubmit.co/mpmanuel21@gmail.com" method="POST">
+      <form class="formulario" id="formulario-asistencia" action="https://formsubmit.co/6fd1b0ac38f1c054de26e1ddaa755997" method="POST">
         <input type="hidden" name="_subject" value="Confirmación de asistencia — Boda Beatriz y Manu">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
@@ -1228,7 +1328,7 @@
             <label class="opcion"><input type="checkbox" name="Dieta vegetariana" value="Sí"> Vegetariano</label>
             <label class="opcion">
               <input type="checkbox" name="Alergia alimentaria" value="Sí" id="check-alergia">
-              Alergia y/o intolerancia
+              ¿Tienes alguna alergia o intolerancia?
             </label>
           </div>
         </div>
@@ -1268,10 +1368,16 @@
 
   <section class="regalo">
     <div class="contenido">
-      <div class="eyebrow">Lo más importante es que vengas</div>
-      <h2>Nuestro mejor regalo</h2>
+      <div class="eyebrow">
+        <div class="regalo-flores-arriba">
+          <img src="flor-delante.webp" alt="" class="regalo-flor regalo-flor-grande" aria-hidden="true" loading="lazy">
+          <img src="flor-delante.webp" alt="" class="regalo-flor regalo-flor-pequena" aria-hidden="true" loading="lazy">
+        </div>
+        Lo más importante<br>es que vengas
+      </div>
       <p>
         El mejor regalo es, sin duda, poder disfrutar de este día con todos vosotros.
+        <img src="flor-delante.webp" alt="" class="regalo-flor regalo-flor-mediana" aria-hidden="true" loading="lazy">
       </p>
     </div>
   </section>
@@ -1297,9 +1403,7 @@
   <section class="final">
     <div class="contenido">
       <div class="foto-final">
-        <img class="foto" src="foto-final.jpg" alt="Beatriz y Manu riendo en la playa, él con ella en brazos" width="1259" height="1600" loading="lazy">
-        <p class="frase">Qué ganas de celebrarlo con vosotros</p>
-        <img src="iniciales.png" alt="B &amp; M" class="iniciales-imagen">
+        <img class="foto" src="foto-final.jpg" alt="Beatriz y Manu riendo en la playa, él con ella en brazos, con el texto ¡Qué ganas de celebrarlo con todos vosotros! y las iniciales B &amp; M" width="1259" height="1600" loading="lazy">
       </div>
     </div>
   </section>
@@ -1386,6 +1490,12 @@
       mostrarGracias("", "", false);
     }
 
+    // URL del "Web app" de Google Apps Script que añade cada confirmación
+    // como una fila nueva en una Google Sheet (para tener la lista de
+    // invitados siempre al día y poder descargarla como .csv). Se rellena
+    // al desplegar el script: ver instrucciones aparte.
+    const HOJA_INVITADOS_URL = "PEGA_AQUI_LA_URL_DEL_WEB_APP_DE_GOOGLE_APPS_SCRIPT";
+
     formulario.addEventListener("submit", async function (evento) {
       evento.preventDefault();
       aviso.classList.remove("visible", "error");
@@ -1394,8 +1504,15 @@
 
       const datos = new FormData(formulario);
 
+      // Guarda también la respuesta en la Google Sheet de invitados. Va en
+      // paralelo y no bloquea el envío del email: si falla (o aún no se ha
+      // configurado la URL), el formulario sigue funcionando con normalidad.
+      if (HOJA_INVITADOS_URL.startsWith("https://script.google.com/")) {
+        fetch(HOJA_INVITADOS_URL, { method: "POST", mode: "no-cors", body: datos }).catch(function () {});
+      }
+
       try {
-        const respuesta = await fetch("https://formsubmit.co/ajax/mpmanuel21@gmail.com", {
+        const respuesta = await fetch("https://formsubmit.co/ajax/6fd1b0ac38f1c054de26e1ddaa755997", {
           method: "POST",
           headers: { Accept: "application/json" },
           body: datos
@@ -1412,7 +1529,15 @@
           throw new Error(resultado.message || "No se ha podido enviar");
         }
       } catch (error) {
-        aviso.textContent = "No se ha podido enviar ahora mismo. Vuelve a intentarlo en un momento o escríbenos a mpmanuel21@gmail.com.";
+        // Si el fallo es de red/CORS (p. ej. formsubmit.co aún no ha confirmado
+        // este formulario por email), en vez de solo mostrar un error hacemos
+        // un envío normal del formulario como respaldo: así el mensaje llega
+        // igualmente y, si es el primer envío, dispara el email de activación.
+        if (error instanceof TypeError) {
+          formulario.submit();
+          return;
+        }
+        aviso.textContent = "No se ha podido enviar ahora mismo. Vuelve a intentarlo en un momento o escríbenos a " + ["mpmanuel21", "gmail.com"].join("@") + ".";
         aviso.classList.add("visible", "error");
       } finally {
         botonEnviar.disabled = false;
