@@ -867,7 +867,7 @@
     }
 
     @media (hover: hover) {
-      .flor-giratoria:hover + .flor-pista .pista-copiar {
+      html:not(.es-tactil) .flor-giratoria:hover + .flor-pista .pista-copiar {
         opacity: 1;
       }
     }
@@ -1545,7 +1545,8 @@
       const estado = document.getElementById("flor-estado");
       const textoCopiado = document.querySelector(".pista-copiado .t");
       const botonVolver = document.querySelector(".flor-volver");
-      const conRaton = window.matchMedia("(hover: hover)");
+      const esDispositivoTactil = document.documentElement.classList.contains("es-tactil");
+      const conRaton = { matches: !esDispositivoTactil && window.matchMedia("(hover: hover)").matches };
       const etiquetaFrente = florGiratoria.getAttribute("aria-label");
       let temporizador;
 
