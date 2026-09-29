@@ -1294,12 +1294,7 @@
         para que puedas disfrutar de la celebración.
       </p>
 
-      <form class="formulario" id="formulario-asistencia" action="https://formsubmit.co/mpmanuel21@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Confirmación de asistencia — Boda Beatriz y Manu">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://beatrizymanu.github.io/Boda-20-12-2026/?enviado=1#asistencia">
-        <input type="text" name="_honey" style="display:none">
+      <form class="formulario" id="formulario-asistencia" action="#" method="POST">
 
         <div class="campo">
           <label for="nombre">Nombre y apellidos</label>
@@ -1490,53 +1485,36 @@
       mostrarGracias("", "", false);
     }
 
-    // URL del "Web app" de Google Apps Script que añade cada confirmación
-    // como una fila nueva en una Google Sheet (para tener la lista de
-    // invitados siempre al día y poder descargarla como .csv). Se rellena
-    // al desplegar el script: ver instrucciones aparte.
-    const HOJA_INVITADOS_URL = "PEGA_AQUI_LA_URL_DEL_WEB_APP_DE_GOOGLE_APPS_SCRIPT";
+    // URL del "Web app" de Google Apps Script: guarda cada confirmación como
+    // fila nueva en la Google Sheet de invitados y os avisa por email. Se
+    // sustituye por la URL real al desplegar el script (ver instrucciones).
+    const HOJA_INVITADOS_URL = "https://script.google.com/macros/s/AKfycby1DYO7LGPC8od5B8ANdmYQTj5HxWh60t3q0P_9_t9jtOcaify9KL9WCFZ7ek1s0zg/exec";
 
     formulario.addEventListener("submit", async function (evento) {
       evento.preventDefault();
       aviso.classList.remove("visible", "error");
+
+      if (!HOJA_INVITADOS_URL.startsWith("https://script.google.com/")) {
+        aviso.textContent = "El formulario aún no está conectado. Escríbenos directamente a " + ["mpmanuel21", "gmail.com"].join("@") + ".";
+        aviso.classList.add("visible", "error");
+        return;
+      }
+
       botonEnviar.disabled = true;
       botonEnviar.textContent = "Enviando...";
 
       const datos = new FormData(formulario);
 
-      // Guarda también la respuesta en la Google Sheet de invitados. Va en
-      // paralelo y no bloquea el envío del email: si falla (o aún no se ha
-      // configurado la URL), el formulario sigue funcionando con normalidad.
-      if (HOJA_INVITADOS_URL.startsWith("https://script.google.com/")) {
-        fetch(HOJA_INVITADOS_URL, { method: "POST", mode: "no-cors", body: datos }).catch(function () {});
-      }
-
       try {
-        const respuesta = await fetch("https://formsubmit.co/ajax/mpmanuel21@gmail.com", {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          body: datos
-        });
-
-        const resultado = await respuesta.json();
-
-        if (respuesta.ok && resultado.success !== "false") {
-          formulario.reset();
-          campoAlergia.classList.remove("visible");
-          detalleAlergia.required = false;
-          mostrarGracias(datos.get("Nombre"), datos.get("Asistencia"), true);
-        } else {
-          throw new Error(resultado.message || "No se ha podido enviar");
+        const respuesta = await fetch(HOJA_INVITADOS_URL, { method: "POST", body: datos });
+        if (!respuesta.ok) {
+          throw new Error("Respuesta no válida de Google Apps Script");
         }
+        formulario.reset();
+        campoAlergia.classList.remove("visible");
+        detalleAlergia.required = false;
+        mostrarGracias(datos.get("Nombre"), datos.get("Asistencia"), true);
       } catch (error) {
-        // Si el fallo es de red/CORS (p. ej. formsubmit.co aún no ha confirmado
-        // este formulario por email), en vez de solo mostrar un error hacemos
-        // un envío normal del formulario como respaldo: así el mensaje llega
-        // igualmente y, si es el primer envío, dispara el email de activación.
-        if (error instanceof TypeError) {
-          formulario.submit();
-          return;
-        }
         aviso.textContent = "No se ha podido enviar ahora mismo. Vuelve a intentarlo en un momento o escríbenos a " + ["mpmanuel21", "gmail.com"].join("@") + ".";
         aviso.classList.add("visible", "error");
       } finally {
